@@ -2,10 +2,12 @@ import pyrebase
 import config
 import atexit
 
+
 class neurosity_sdk:
     def __init__(self, options):
         if ("device_id" not in options):
-            raise ValueError("Neurosity SDK: A device ID is required to use the SDK")
+            raise ValueError(
+                "Neurosity SDK: A device ID is required to use the SDK")
 
         options.setdefault("environment", "production")
         self.options = options
@@ -21,18 +23,19 @@ class neurosity_sdk:
         self.remove_all_subscriptions()
 
     def get_server_timestamp(self):
-        return { ".sv": "timestamp" }
+        return {".sv": "timestamp"}
 
     def login(self, credentials):
         if (hasattr(self, "user") and hasattr(self, "token")):
             print("Neurosity SDK: The SDK is already authenticated.")
             return
 
-        self.user = self.auth.sign_in_with_email_and_password(credentials["email"], credentials["password"])
+        self.user = self.auth.sign_in_with_email_and_password(
+            credentials["email"], credentials["password"])
         self.token = self.user['idToken']
 
         if (not hasattr(self, "client_id")):
-           self.add_client()
+            self.add_client()
 
     def add_client(self):
         device_id = self.options["device_id"]
@@ -64,7 +67,7 @@ class neurosity_sdk:
 
         push_result = self.db.child(actions_path).push(action, self.token)
         return push_result
-    
+
     def add_subscription(self, metric, label, atomic):
         client_id = self.client_id
         device_id = self.options["device_id"]
@@ -80,7 +83,8 @@ class neurosity_sdk:
             "serverType": "firebase",
         }
 
-        push_result = self.db.child(subscription_path).set(subscription_payload, self.token)
+        self.db.child(subscription_path).set(
+            subscription_payload, self.token)
 
         # caching subscription ids locally for unsubscribe teardown on exit
         self.subscription_ids.append(subscription_id)
@@ -104,7 +108,7 @@ class neurosity_sdk:
 
     def stream_metric(self, callback, metric, label, atomic):
         subscription_id = self.add_subscription(metric, label, atomic)
-        
+
         if (atomic):
             metric_path = f"metrics/{metric}"
         else:
@@ -116,13 +120,14 @@ class neurosity_sdk:
 
         return self.stream_from_path(callback, metric_path, teardown, subscription_id)
 
-    def stream_from_path(self, callback, path_name, teardown = None, subscription_id = None):
+    def stream_from_path(self, callback, path_name, teardown=None, subscription_id=None):
         device_id = self.options["device_id"]
 
         path = f"devices/{device_id}/{path_name}"
         stream_id = subscription_id or self.db.generate_key()
 
         initial_message = {}
+
         def stream_handler(message):
             if (message["path"] == "/"):
                 initial_message[message["stream_id"]] = message
@@ -131,13 +136,15 @@ class neurosity_sdk:
                 child = message["path"][1:]
                 full_payload = initial_message[message["stream_id"]]["data"]
                 if (message["data"] == None):
-                    full_payload.pop(child, None) # delete key is value is `None`
+                    # delete key is value is `None`
+                    full_payload.pop(child, None)
                 else:
                     full_payload[child] = message["data"]
 
             callback(full_payload)
 
-        stream = self.db.child(path).stream(stream_handler, self.token, stream_id=stream_id)
+        stream = self.db.child(path).stream(
+            stream_handler, self.token, stream_id=stream_id)
 
         def unsubscribe():
             if (teardown):
@@ -170,10 +177,10 @@ class neurosity_sdk:
 
     def brainwaves_raw_unfiltered(self, callback):
         return self.stream_metric(callback, "brainwaves", "rawUnfiltered", False)
-    
+
     def brainwaves_psd(self, callback):
         return self.stream_metric(callback, "brainwaves", "psd", False)
-    
+
     def brainwaves_power_by_band(self, callback):
         return self.stream_metric(callback, "brainwaves", "powerByBand", False)
 
@@ -205,7 +212,7 @@ class neurosity_sdk:
         return self.get_from_path("status")
 
     def settings_once(self):
-       return self.get_from_path("settings")
+        return self.get_from_path("settings")
 
     def get_info(self):
-       return self.get_from_path("info")
+        return self.get_from_path("info")
