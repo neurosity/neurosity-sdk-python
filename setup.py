@@ -17,8 +17,8 @@ setup(
     license='MIT',
     install_requires=['pyrebase'],
     classifiers=[
-        'Neurosity SDK',
-        'EEG',
-        'MIT License'
+        'Programming Language :: Python :: 3',
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: OS Independent',
     ],
 )
