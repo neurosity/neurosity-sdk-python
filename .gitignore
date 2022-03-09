@@ -1,2 +1,5 @@
 .env
 venv
+dist
+build
+**/*.egg-info
