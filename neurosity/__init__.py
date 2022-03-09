@@ -1,0 +1,2 @@
+import neurosity.config
+from neurosity.neurosity import neurosity_sdk
