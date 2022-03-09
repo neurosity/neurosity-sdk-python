@@ -1,6 +1,6 @@
 import pyrebase
 import atexit
-import config
+import neurosity.config
 
 
 class neurosity_sdk:
