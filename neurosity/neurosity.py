@@ -1,7 +1,6 @@
 import pyrebase
 import atexit
-import neurosity.config
-
+from neurosity.config import Config
 
 class neurosity_sdk:
     def __init__(self, options):
@@ -11,7 +10,7 @@ class neurosity_sdk:
 
         options.setdefault("environment", "production")
         self.options = options
-        config_env = config.staging if options["environment"] == "staging" else config.prod
+        config_env = Config.STAGING if options["environment"] == "staging" else config.PRODUCTION
         self.firebase = pyrebase.initialize_app(config_env)
         self.auth = self.firebase.auth()
         self.db = self.firebase.database()
