@@ -1,4 +1,4 @@
-class Config:
+class PyRebase:
     PRODUCTION = {
       "apiKey": "AIzaSyB0TkZ83Fj0CIzn8AAmE-Osc92s3ER8hy8",
       "authDomain": "neurosity-device.firebaseapp.com",
