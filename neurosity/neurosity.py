@@ -1,18 +1,16 @@
 import pyrebase
 import atexit
-import neurosity.config
-
+from neurosity.config import PyRebase
 
 class neurosity_sdk:
     def __init__(self, options):
         if ("device_id" not in options):
-            raise ValueError(
-                "Neurosity SDK: A device ID is required to use the SDK")
+            raise ValueError("Neurosity SDK: A device ID is required to use the SDK")
 
         options.setdefault("environment", "production")
         self.options = options
-        config_env = config.staging if options["environment"] == "staging" else config.prod
-        self.firebase = pyrebase.initialize_app(config_env)
+        pyrebase_config = PyRebase.STAGING if options["environment"] == "staging" else PyRebase.PRODUCTION
+        self.firebase = pyrebase.initialize_app(pyrebase_config)
         self.auth = self.firebase.auth()
         self.db = self.firebase.database()
         self.subscription_ids = []
