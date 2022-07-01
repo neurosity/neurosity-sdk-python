@@ -39,7 +39,7 @@ NEUROSITY_DEVICE_ID=your device id here
 
 We take data privacy very seriously at Neurosity. This is why we have designed the Neurosity OS to require authentication and authorization for streaming data.
 
-When you sign up for an account on the Neurosity mobile app or console.neurosity.co and claim a device you have three new important items: deviceId, email, and password. If your device is not added to your Neurosity account, you will not be able to authenticate with it.
+When you sign up for an account on the Neurosity mobile app or [console.neurosity.co](https://console.neurosity.co) and claim a device you have three new important items: deviceId, email, and password. If your device is not added to your Neurosity account, you will not be able to authenticate with it.
 
 ```python
 from neurosity import neurosity_sdk
@@ -108,6 +108,8 @@ unsubscribe = neurosity.brainwaves_raw(callback)
 ```
 
 The code above will output new epochs of 16 samples approximately every 62.5ms (see the `data` property). Here's an example of 1 event:
+
+<details><summary>Sample data</summary>
 
 ```
 {
@@ -208,6 +210,8 @@ The code above will output new epochs of 16 samples approximately every 62.5ms (
 }
 ```
 
+</details>
+
 Epochs are pre-filtered on the device's Operating System to give you the cleanest data possible with maximum performance. These filters include:
 
 - Notch of `50Hz` or `60Hz` and a bandwidth of `1`.
@@ -260,6 +264,9 @@ unsubscribe = neurosity.brainwaves_raw_unfiltered(callback)
 ```
 
 The code above will output new epochs of 16 samples approximately every 62.5ms (see the `data` property).. Here's an example of 1 event:
+
+<details><summary>Sample data</summary>
+
 
 ```
 {
@@ -359,6 +366,8 @@ The code above will output new epochs of 16 samples approximately every 62.5ms (
 }
 ```
 
+</details>
+
 ### Power Spectral Density (PSD)
 
 ```python
@@ -371,6 +380,8 @@ unsubscribe = neurosity.brainwaves_psd(callback)
 The code above will output new epochs 4 times a second. Every frequency label (e.g. alpha) contains the computed FFT (Fast Fourier transform) value per channel (see the `psd` property), as well as the frequency ranges (see the `freqs` property).
 
 Here's an example of 1 event:
+
+<details><summary>Sample data</summary>
 
 ```
 {
@@ -585,6 +596,8 @@ Here's an example of 1 event:
 }
 ```
 
+</details>
+
 Please note this data is pre-filtered using the same filters describe under the `raw` data parameter: notch and band pass.
 
 ### Power By Band
@@ -599,6 +612,8 @@ unsubscribe = neurosity.brainwaves_power_by_band(callback)
 The code above will output new epochs 4 times a second. Every frequency label (e.g. beta) contains an average power value per channel.
 
 Here's an example of 1 event:
+
+<details><summary>Sample data</summary>
 
 ```
 {
@@ -657,6 +672,8 @@ Here's an example of 1 event:
   }
 }
 ```
+
+</details>
 
 Please note this data is pre-filtered using the same filters describe under the `brainwaves_raw` method: notch and band pass.
 
