@@ -170,6 +170,17 @@ class neurosity_sdk:
             }
         })
 
+    def get_timesync(self):
+
+        response = await self.add_action({
+            "command": "timesync",
+            "action": "get",
+            "message": {},
+            "responseRequired" : True,
+            "responseTimeout": 250
+        })
+        return response.timestamp
+
     def brainwaves_raw(self, callback):
         return self.stream_metric(callback, "brainwaves", "raw", False)
 

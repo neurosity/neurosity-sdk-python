@@ -6,7 +6,8 @@ import time
 load_dotenv()
 
 neurosity = neurosity_sdk({
-    "device_id": os.getenv("NEUROSITY_DEVICE_ID")
+    "device_id": os.getenv("NEUROSITY_DEVICE_ID"),
+    "timesync": True
 })
 
 neurosity.login({
