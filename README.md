@@ -42,13 +42,13 @@ We take data privacy very seriously at Neurosity. This is why we have designed t
 When you sign up for an account on the Neurosity mobile app or console.neurosity.co and claim a device you have three new important items: deviceId, email, and password. If your device is not added to your Neurosity account, you will not be able to authenticate with it.
 
 ```python
-from neurosity import neurosity_sdk
+from neurosity import NeurositySDK
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
 
-neurosity = neurosity_sdk({
+neurosity = NeurositySDK({
     "device_id": os.getenv("NEUROSITY_DEVICE_ID"),
 })
 
@@ -86,13 +86,13 @@ There are four brainwaves metrics:
 The `raw` brainwaves parameter emits events of 16 samples for Crown and 25 for Notion 1 and 2. We call these groups of samples Epochs.
 
 ```python
-from neurosity import neurosity_sdk
+from neurosity import NeurositySDK
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
 
-neurosity = neurosity_sdk({
+neurosity = NeurositySDK({
     "device_id": os.getenv("NEUROSITY_DEVICE_ID"),
 })
 
@@ -238,13 +238,13 @@ The unfiltered raw data follows the same shape as `brainwaves_raw` data shape, j
 Note that unfiltered raw data will include environmental noise in the signal, as well as DC drift, which is expected when working with EEG.
 
 ```python
-from neurosity import neurosity_sdk
+from neurosity import NeurositySDK
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
 
-neurosity = neurosity_sdk({
+neurosity = NeurositySDK({
     "device_id": os.getenv("NEUROSITY_DEVICE_ID"),
 })
 
@@ -819,7 +819,25 @@ unsubscribe = neurosity.settings(callback)
 
 ## Develop
 
-Use the .devcontainer
+### Setting up the environment
+
+Use the Dev Container extension within VSCode for the a stable development experience. 
+
+Install all the requirements for dev
+
+```bash
+pip install -r requirements.txt -r dev-requirements.txt
+pip install -e .
+```
+
+### Running the Example
+
+Run from the root directory after setting up your development environment above:
+
+```bash
+python examples/example.py
+```
+
 
 ## Code of Conduct
 

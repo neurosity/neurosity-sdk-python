@@ -9,8 +9,3 @@ git config --global --add safe.directory '/workspaces'
 
 # Update pip
 pip install --upgrade pip
-
-# analytics container setup
-#source bin/activate-hermit
-#pip install virtualenv
-#virtualenv analytics
