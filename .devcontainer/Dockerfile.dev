@@ -1,0 +1,13 @@
+FROM mcr.microsoft.com/devcontainers/python:3.9
+
+RUN apt update && apt install -y \
+	# dev tools: vim (better than default, vi)
+	vim \
+	# make, gcc, etc.
+	build-essential pkg-config
+
+WORKDIR /home/node
+# Load .env first if it exists (for secrets + overrides) before .env-defaults.
+RUN echo '\nset -a; [[ -f ".env" ]] && . .env; . .env-defaults; set +a' >> .bashrc
+
+CMD ["/bin/bash"]

@@ -15,7 +15,7 @@ setup(
     long_description_content_type='text/markdown',
     author='Alex Castillo',
     license='MIT',
-    install_requires=['pyrebase'],
+    install_requires=['firebase-rest-api'],
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',

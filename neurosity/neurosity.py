@@ -1,5 +1,6 @@
-import pyrebase
-import atexit
+import firebase
+import signal
+
 from neurosity.config import PyRebase
 
 class neurosity_sdk:
@@ -10,11 +11,14 @@ class neurosity_sdk:
         options.setdefault("environment", "production")
         self.options = options
         pyrebase_config = PyRebase.STAGING if options["environment"] == "staging" else PyRebase.PRODUCTION
-        self.firebase = pyrebase.initialize_app(pyrebase_config)
+        self.firebase = firebase.initialize_app(pyrebase_config)
         self.auth = self.firebase.auth()
         self.db = self.firebase.database()
         self.subscription_ids = []
-        atexit.register(self.exit_handler)
+
+        # register a signal handler for SystemExit and KeyboardInterrupt
+        signal.signal(signal.SIGTERM, self.exit_handler)
+        signal.signal(signal.SIGINT, self.exit_handler)
 
     def exit_handler(self):
         self.remove_client()

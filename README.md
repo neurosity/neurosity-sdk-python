@@ -817,6 +817,10 @@ def callback(data):
 unsubscribe = neurosity.settings(callback)
 ```
 
+## Develop
+
+Use the .devcontainer
+
 ## Code of Conduct
 
 This project has adopted a [Code of Conduct](CODE_OF_CONDUCT.md). Contact [opensource@neurosity.co](mailto:opensource@neurosity.co) with any additional questions or comments.

@@ -22,7 +22,16 @@ def callback(data):
     print(data)
 
 
-unsubscribe = neurosity.focus(callback)
+neurosity.focus(callback)
 
-time.sleep(10)
-unsubscribe()
+try:
+    # include code to run the program
+    time.sleep(10)
+    print("Exiting after 10 seconds - cleaning up")
+    neurosity.exit_handler()
+    print("Cleaned up")
+except (KeyboardInterrupt, SystemExit):
+    # handle the keyboard interrupt or program halt
+    print("Keyboard interrupt or program halt - cleaning up")
+    neurosity.exit_handler()
+    print("Cleaned up")
