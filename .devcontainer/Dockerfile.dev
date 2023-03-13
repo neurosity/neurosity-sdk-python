@@ -7,7 +7,5 @@ RUN apt update && apt install -y \
 	build-essential pkg-config
 
 WORKDIR /home/node
-# Load .env first if it exists (for secrets + overrides) before .env-defaults.
-RUN echo '\nset -a; [[ -f ".env" ]] && . .env; . .env-defaults; set +a' >> .bashrc
 
 CMD ["/bin/bash"]
