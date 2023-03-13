@@ -17,4 +17,7 @@ pip install -r requirements.txt
 echo "Installing development requirements"
 pip install -r dev-requirements.txt
 
+echo "Configuring neurosity package for development"
+pip install -e .
+
 echo "Done with post start commands"
