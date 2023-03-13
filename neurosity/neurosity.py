@@ -1,6 +1,7 @@
 import atexit
 import firebase
 import signal
+import os
 
 from .config import FirebaseConfig
 
@@ -21,11 +22,18 @@ class NeurositySDK:
         atexit.register(self.exit_handler)
 
         # register a signal handler for Forced Terminal Kills
+        signal.signal(signal.SIGTERM, self.exit_handler)
+        signal.signal(signal.SIGINT, self.exit_handler)
         signal.signal(signal.SIGHUP, self.exit_handler)
 
     def exit_handler(self, signum=None, frame=None):
         self.remove_client()
         self.remove_all_subscriptions()
+        signal.signal(signal.SIGTERM, signal.SIG_DFL)
+        signal.signal(signal.SIGINT, signal.SIG_DFL)
+        signal.signal(signal.SIGHUP, signal.SIG_DFL)
+        print("exit h")
+        os.kill(os.getpid(), signal.SIGTERM)
         
     def get_server_timestamp(self):
         return {".sv": "timestamp"}
