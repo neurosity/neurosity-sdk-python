@@ -1,11 +1,10 @@
-from neurosity import neurosity_sdk
+from neurosity import NeurositySDK
 from dotenv import load_dotenv
 import os
-import time
 
 load_dotenv()
 
-neurosity = neurosity_sdk({
+neurosity = NeurositySDK({
     "device_id": os.getenv("NEUROSITY_DEVICE_ID")
 })
 
@@ -17,12 +16,7 @@ neurosity.login({
 info = neurosity.get_info()
 print(info)
 
-
 def callback(data):
     print(data)
 
-
-unsubscribe = neurosity.focus(callback)
-
-time.sleep(10)
-unsubscribe()
+neurosity.focus(callback)

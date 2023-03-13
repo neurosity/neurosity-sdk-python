@@ -1,0 +1,11 @@
+FROM mcr.microsoft.com/devcontainers/python:3.9
+
+RUN apt update && apt install -y \
+	# dev tools: vim (better than default, vi)
+	vim \
+	# make, gcc, etc.
+	build-essential pkg-config
+
+WORKDIR /home/node
+
+CMD ["/bin/bash"]

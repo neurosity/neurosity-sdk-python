@@ -1,25 +1,40 @@
-import pyrebase
 import atexit
-from neurosity.config import PyRebase
+import firebase
+import signal
+import os
 
-class neurosity_sdk:
+from .config import FirebaseConfig
+
+class NeurositySDK:
     def __init__(self, options):
         if ("device_id" not in options):
             raise ValueError("Neurosity SDK: A device ID is required to use the SDK")
 
         options.setdefault("environment", "production")
         self.options = options
-        pyrebase_config = PyRebase.STAGING if options["environment"] == "staging" else PyRebase.PRODUCTION
-        self.firebase = pyrebase.initialize_app(pyrebase_config)
+        pyrebase_config = FirebaseConfig.STAGING if options["environment"] == "staging" else FirebaseConfig.PRODUCTION
+        self.firebase = firebase.initialize_app(pyrebase_config)
         self.auth = self.firebase.auth()
         self.db = self.firebase.database()
         self.subscription_ids = []
+
+        # For a normal exit
         atexit.register(self.exit_handler)
 
-    def exit_handler(self):
+        # register a signal handler for Forced Terminal Kills
+        signal.signal(signal.SIGTERM, self.exit_handler)
+        signal.signal(signal.SIGINT, self.exit_handler)
+        signal.signal(signal.SIGHUP, self.exit_handler)
+
+    def exit_handler(self, signum=None, frame=None):
         self.remove_client()
         self.remove_all_subscriptions()
-
+        signal.signal(signal.SIGTERM, signal.SIG_DFL)
+        signal.signal(signal.SIGINT, signal.SIG_DFL)
+        signal.signal(signal.SIGHUP, signal.SIG_DFL)
+        print("exit h")
+        os.kill(os.getpid(), signal.SIGTERM)
+        
     def get_server_timestamp(self):
         return {".sv": "timestamp"}
 

@@ -7,7 +7,7 @@ setup(
     name='neurosity',
     py_modules=['neurosity'],
     packages=find_packages(),
-    version='1.0.2',
+    version='2.0.0',
     url='https://github.com/neurosity/neurosity-python-sdk',
     python_requires='>=3.8',
     description='Official Neurosity Python SDK',
@@ -15,7 +15,7 @@ setup(
     long_description_content_type='text/markdown',
     author='Alex Castillo',
     license='MIT',
-    install_requires=['pyrebase'],
+    install_requires=['firebase-rest-api'],
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
