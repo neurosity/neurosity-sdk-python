@@ -821,9 +821,9 @@ unsubscribe = neurosity.settings(callback)
 
 ### Setting up the environment
 
-Use the Dev Container extension within VSCode for the a stable development experience. 
+Use the Dev Container extension within VSCode for a stable and consistent development experience.
 
-Install all the requirements for dev
+Install all the requirements for development:
 
 ```bash
 pip install -r requirements.txt -r dev-requirements.txt
@@ -837,7 +837,6 @@ Run from the root directory after setting up your development environment above:
 ```bash
 python examples/example.py
 ```
-
 
 ## Code of Conduct
 
