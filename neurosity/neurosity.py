@@ -32,7 +32,6 @@ class NeurositySDK:
         signal.signal(signal.SIGTERM, signal.SIG_DFL)
         signal.signal(signal.SIGINT, signal.SIG_DFL)
         signal.signal(signal.SIGHUP, signal.SIG_DFL)
-        print("exit h")
         os.kill(os.getpid(), signal.SIGTERM)
         
     def get_server_timestamp(self):
@@ -145,6 +144,8 @@ class NeurositySDK:
             if (message["path"] == "/"):
                 initial_message[message["stream_id"]] = message
                 full_payload = message["data"]
+                if full_payload == None:
+                    return
             else:
                 child = message["path"][1:]
                 full_payload = initial_message[message["stream_id"]]["data"]
