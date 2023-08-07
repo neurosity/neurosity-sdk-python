@@ -8,7 +8,13 @@
 
 - ...
 
-# 2.0.0
+# 2.1.0
+
+### 🐛 Bug fixes
+
+- Remove `None` type that always printed out on subscriptions
+
+# 2.0.1
 
 ### 💣 Breaking Changes
 

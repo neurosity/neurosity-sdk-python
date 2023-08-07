@@ -1,6 +1,7 @@
 from neurosity import NeurositySDK
 from dotenv import load_dotenv
 import os
+import time
 
 load_dotenv()
 
@@ -19,5 +20,7 @@ print(info)
 def callback(data):
     print(data)
 
-unsubscribe = neurosity.focus(callback)
+unsubscribe = neurosity.brainwaves_raw(callback)
+time.sleep(5)
 unsubscribe()
+print("Done with example.py")
