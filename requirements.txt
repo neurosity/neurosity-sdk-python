@@ -1,1 +1,1 @@
-firebase-rest-api
+firebase-rest-api~=1.10
