@@ -49,7 +49,7 @@ import os
 load_dotenv()
 
 neurosity = NeurositySDK({
-    "device_id": os.getenv("NEUROSITY_DEVICE_ID"),
+    "device_id": os.getenv("NEUROSITY_DEVICE_ID")
 })
 
 neurosity.login({
@@ -836,6 +836,30 @@ Run from the root directory after setting up your development environment above:
 
 ```bash
 python examples/example.py
+```
+
+## Release
+
+We recommend running the dev container to make builds and releases.
+
+### Build 
+
+To package the project enter from the cli from the root directory:
+
+```bash
+python3 -m build --sdist --wheel --outdir dist/ .
+```
+
+### Test Release with TestPyPi
+
+```bash
+twine upload --repository testpypi dist/*
+```
+
+### Release to PyPi
+
+```bash
+twine upload dist/*
 ```
 
 ## Code of Conduct

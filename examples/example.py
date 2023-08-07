@@ -19,4 +19,5 @@ print(info)
 def callback(data):
     print(data)
 
-neurosity.focus(callback)
+unsubscribe = neurosity.focus(callback)
+unsubscribe()
