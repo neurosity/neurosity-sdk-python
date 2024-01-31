@@ -33,7 +33,8 @@ class NeurositySDK:
         self.remove_all_subscriptions()
         signal.signal(signal.SIGTERM, signal.SIG_DFL)
         signal.signal(signal.SIGINT, signal.SIG_DFL)
-        signal.signal(signal.SIGHUP, signal.SIG_DFL)
+        if system() != "Windows":
+            signal.signal(signal.SIGHUP, signal.SIG_DFL)
         os.kill(os.getpid(), signal.SIGTERM)
         
     def get_server_timestamp(self):
