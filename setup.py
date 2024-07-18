@@ -7,7 +7,7 @@ setup(
     name='neurosity',
     py_modules=['neurosity'],
     packages=find_packages(),
-    version='2.1.1',
+    version='2.2.0',
     url='https://github.com/neurosity/neurosity-sdk-python',
     python_requires='>=3.8',
     description='Official Neurosity Python SDK',

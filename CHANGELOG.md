@@ -8,6 +8,16 @@
 
 - ...
 
+# 2.2.0
+
+### ✅ Features & Improvements
+
+- Add Terminal Visualization Example for Neurosity SDK with Python Dashing Library #17 - thanks @AdonaiVera
+
+### 🐛 Bug fixes
+
+- Fix: Don't check SIGHUP on Windows #15 - thanks @mayankja1n
+
 # 2.1.0
 
 ### 🐛 Bug fixes
